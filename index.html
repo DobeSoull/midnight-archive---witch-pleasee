@@ -67,38 +67,115 @@
       </nav>
     </header>
 
-    <!-- ASYMMETRIC MAGAZINE-STYLE HERO SECTION -->
+    <!-- ASYMMETRIC MAGAZINE-STYLE HERO SECTION (RANDOMLY ANGLED BLOCKS COLLAGE) -->
     <section class="hero-magazine" id="hero">
+      <!-- Main Asymmetric Content Column with Angled Blocks -->
       <div class="hero-left-col">
-        <div class="issue-tag">VOL. XIII // RESTRICTED ACCESS // DERRY, MAINE</div>
-        <h1 class="hero-title glitch-text" data-text="TALES FROM THE UNKNOWN">
-          TALES FROM <br><span>THE UNKNOWN</span>
-        </h1>
-        <p class="hero-excerpt">
-          Anonymously recorded testimonies of encounters beneath the streets of Derry. Unexplained disappearances, sewer frequencies, and entities that hunger every 27 years. Read what others barely survived—or confess your own nightmare.
-        </p>
-
-        <div class="hero-cta-group">
-          <a href="#stories" class="btn-primary">Explore Chronicles</a>
-          <a href="#investigation" class="btn-secondary">The Kapidhwaj Investigation</a>
-          <a href="#submit" class="btn-tertiary">Submit Anonymously</a>
+        <!-- Angled Block 1: Issue Docket Tag -->
+        <div class="mag-block hero-block-tag">
+          <span class="block-pin">📌</span>
+          <span class="kicker-tag">VOL. XIII // RESTRICTED ACCESS</span>
+          <span class="kicker-bullet">•</span>
+          <span class="kicker-loc">DERRY MUNICIPAL ARCHIVE</span>
         </div>
 
-        <div class="hero-subtext">
-          <span>🎈 "You'll float down here... we all float down here."</span>
+        <!-- Angled Block 2: Title Headline Slab -->
+        <div class="mag-block hero-block-title">
+          <h1 class="hero-title glitch-text" data-text="TALES FROM THE UNKNOWN">
+            <span class="title-line-1">TALES FROM</span>
+            <span class="title-line-2">THE UNKNOWN</span>
+          </h1>
+        </div>
+
+        <!-- Angled Block 3: Narrative Excerpt Note -->
+        <div class="mag-block hero-block-excerpt">
+          <div class="block-tape-top"></div>
+          <p class="hero-excerpt">
+            Anonymously recorded testimonies of encounters beneath the streets of Derry. Unexplained disappearances, sewer frequencies, and entities that hunger every 27 years. Read what others barely survived—or confess your own nightmare.
+          </p>
+        </div>
+
+        <!-- Angled Block 4: CTA Action Strip -->
+        <div class="mag-block hero-block-cta">
+          <div class="hero-cta-group">
+            <a href="#stories" class="btn-primary">
+              <span>Explore Chronicles</span>
+              <span class="btn-arrow">&rarr;</span>
+            </a>
+            <a href="#investigation" class="btn-secondary">The Kapidhwaj Investigation</a>
+            <a href="#submit" class="btn-tertiary">Submit Anonymously</a>
+          </div>
+        </div>
+
+        <!-- Angled Block 5: Telemetry Status Slip -->
+        <div class="mag-block hero-block-telemetry">
+          <div class="hero-telemetry-bar">
+            <div class="telemetry-item">
+              <span class="telemetry-label">SIGNAL:</span>
+              <span class="telemetry-val">27.9 MHz</span>
+            </div>
+            <div class="telemetry-sep">/</div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">SEWER STATUS:</span>
+              <span class="telemetry-val text-alert">VALVES OPEN</span>
+            </div>
+            <div class="telemetry-sep">/</div>
+            <div class="telemetry-item quote-telemetry">
+              <span>🎈 "You'll float too..."</span>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Asymmetric Right Column with Angled Evidence Dossiers -->
       <div class="hero-right-col">
-        <div class="featured-card-glitch">
-          <div class="card-badge">TOP ARCHIVE RECORDING // DEPT 1988</div>
-          <div class="featured-stamp">CONFIDENTIAL</div>
-          <h3>The Entity in Ward 4B</h3>
-          <p class="meta">By Anonymous • 8 min read • Category: Medical Horror</p>
-          <p class="snippet">"The monitor didn't flatline. It started spelling out names in Morse code, starting with mine... and then came the high-pitched giggle from the ventilator duct."</p>
-          <div class="featured-actions">
-            <button class="btn-read-feat" onclick="openStoryModal('The Entity in Ward 4B', 'Medical Horror', 'Anonymous', 'The monitor didn\'t flatline. It started spelling out names in Morse code, starting with mine... Every night at exactly 3:15 AM, the breathing machine in the corner of Ward 4B would rhythmically alter its hiss. Nurses claimed it was just pressure variance, but old Dr. Vance left behind a journal detailing the patient who came in breathing normally and left completely hollowed out. When I took the night shift, I checked the audio logs. It wasn\'t air. It was whispering: \'Did you bring Georgie? We have red balloons waiting for you both.\'')">Read Full Account</button>
+        <!-- Angled Block 6: Featured Investigation Card -->
+        <div class="mag-block hero-block-featured">
+          <div class="block-tape-corner"></div>
+          <div class="featured-card-glitch">
+            <div class="card-top-bar">
+              <span class="live-rec-dot"></span>
+              <span class="card-badge">EVIDENCE DOSSIER // DEPT 1988</span>
+              <span class="tape-tag">TAPE #04-B</span>
+            </div>
+
+            <div class="featured-stamp">CONFIDENTIAL</div>
+
+            <h3 class="featured-story-title">The Entity in Ward 4B</h3>
+            <p class="meta">Recorded by Anonymous • 8 min read • Medical Horror</p>
+
+            <!-- Mini Audio Frequency Waveform Visualizer -->
+            <div class="mini-waveform">
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+            </div>
+
+            <p class="snippet">
+              "The monitor didn't flatline. It started spelling out names in Morse code, starting with mine... and then came the high-pitched giggle from the ventilator duct."
+            </p>
+
+            <div class="featured-actions">
+              <button class="btn-read-feat" onclick="openStoryModal('The Entity in Ward 4B', 'Medical Horror', 'Anonymous', 'The monitor didn\'t flatline. It started spelling out names in Morse code, starting with mine... Every night at exactly 3:15 AM, the breathing machine in the corner of Ward 4B would rhythmically alter its hiss. Nurses claimed it was just pressure variance, but old Dr. Vance left behind a journal detailing the patient who came in breathing normally and left completely hollowed out. When I took the night shift, I checked the audio logs. It wasn\'t air. It was whispering: \'Did you bring Georgie? We have red balloons waiting for you both.\'')">
+                <span>Inspect Audio Intercept</span> &rarr;
+              </button>
+            </div>
           </div>
+        </div>
+
+        <!-- Angled Block 7: Polaroid Evidence Photo Clip -->
+        <div class="mag-block hero-block-polaroid" onclick="showWhisperModal('EXHIBIT 01: STORM DRAIN', '&quot;A crimson balloon was photographed floating against the current at the intersection of Witcham and Jackson Street. The witness reported hearing laughter through the drainpipe moments before disappearing.&quot;')" title="Click to inspect evidence">
+          <div class="polaroid-pin">📌</div>
+          <div class="polaroid-img-frame">
+            <div class="polaroid-glitch-art">🎈</div>
+            <div class="polaroid-caption">EXHIBIT #01: SEWER SIGHTING</div>
+          </div>
+          <div class="polaroid-meta">LAT 44.8016° N // WITCHAM ST</div>
         </div>
       </div>
     </section>
