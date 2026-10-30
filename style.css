@@ -136,7 +136,7 @@ html::-webkit-scrollbar-thumb:hover {
   transition: opacity 0.3s ease;
 }
 
-/* Atmospheric lightning flicker */
+/* Atmospheric lightning & screen glitch flash */
 .screen-glitch-flash {
   position: fixed;
   top: 0;
@@ -145,13 +145,58 @@ html::-webkit-scrollbar-thumb:hover {
   height: 100vh;
   background: rgba(255, 34, 51, 0.18);
   pointer-events: none;
-  z-index: 999;
+  z-index: 1005;
   opacity: 0;
   transition: opacity 0.08s ease-out;
 }
 
 .screen-glitch-flash.flash-active {
   opacity: 1;
+}
+
+.screen-glitch-flash.modal-glitch-burst {
+  animation: modalGlitchBurst 0.32s ease-out forwards;
+}
+
+@keyframes modalGlitchBurst {
+  0% { opacity: 0; background: rgba(0, 255, 234, 0.35); }
+  35% { opacity: 1; background: rgba(255, 0, 55, 0.45); transform: translateY(-4px); }
+  65% { opacity: 0.6; background: rgba(0, 0, 0, 0.7); transform: translateY(3px); }
+  100% { opacity: 0; }
+}
+
+/* CRT Horror Scanlines & Surveillance Interference */
+.crt-scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 13;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.3) 50%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.02),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.02)
+  );
+  background-size: 100% 4px, 6px 100%;
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.crt-scanlines.scanline-jitter {
+  animation: scanlineJitterAnim 0.18s ease-out;
+}
+
+@keyframes scanlineJitterAnim {
+  0% { transform: translateY(0); opacity: 0.45; }
+  50% { transform: translateY(4px) scaleY(1.02); opacity: 0.85; filter: contrast(1.5) hue-rotate(90deg); }
+  100% { transform: translateY(0); opacity: 0.45; }
 }
 
 /* Top Progress Bar */
@@ -551,11 +596,17 @@ html::-webkit-scrollbar-thumb:hover {
   letter-spacing: 1px;
 }
 
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
 .title-line-1 {
   display: block;
   font-size: 3.5rem;
   color: #ffffff;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+  transition: transform 0.15s ease, text-shadow 0.15s ease;
 }
 
 .title-line-2 {
@@ -564,8 +615,10 @@ html::-webkit-scrollbar-thumb:hover {
   color: var(--accent-blood);
   margin-left: 25px;
   text-shadow: 0 0 35px rgba(181, 31, 40, 0.95), 0 0 70px rgba(255, 34, 51, 0.5);
+  transition: transform 0.15s ease, text-shadow 0.15s ease;
 }
 
+/* Glitch Pseudo Layers */
 .glitch-text::before,
 .glitch-text::after {
   content: attr(data-text);
@@ -576,38 +629,105 @@ html::-webkit-scrollbar-thumb:hover {
   height: 100%;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.15s ease;
 }
 
-.hero-title:hover::before,
-.hero-title.glitch-active::before {
-  opacity: 0.8;
-  color: #00ffea;
-  z-index: -1;
-  transform: translate(-3px, -1px);
-  clip-path: polygon(0 20%, 100% 20%, 100% 45%, 0 45%);
-  animation: glitchAnim1 0.4s infinite;
+/* Hover and Active State on Main Headline */
+.hero-block-title:hover .glitch-text::before,
+.hero-title:hover .glitch-text::before,
+.glitch-text:hover::before,
+.glitch-text.glitch-active::before {
+  opacity: 0.95;
+  color: #00ffff;
+  z-index: 5;
+  transform: translate(-3px, -2px);
+  clip-path: polygon(0 15%, 100% 15%, 100% 42%, 0 42%);
+  animation: chromaticGlitch1 0.22s infinite linear alternate-reverse;
+  mix-blend-mode: screen;
+  text-shadow: 0 0 12px #00ffff;
 }
 
-.hero-title:hover::after,
-.hero-title.glitch-active::after {
-  opacity: 0.8;
-  color: #ff0055;
-  z-index: -2;
+.hero-block-title:hover .glitch-text::after,
+.hero-title:hover .glitch-text::after,
+.glitch-text:hover::after,
+.glitch-text.glitch-active::after {
+  opacity: 0.95;
+  color: #ff0044;
+  z-index: 6;
   transform: translate(3px, 1px);
-  clip-path: polygon(0 60%, 100% 60%, 100% 85%, 0 85%);
-  animation: glitchAnim2 0.3s infinite;
+  clip-path: polygon(0 58%, 100% 58%, 100% 88%, 0 88%);
+  animation: chromaticGlitch2 0.26s infinite linear alternate-reverse;
+  mix-blend-mode: screen;
+  text-shadow: 0 0 12px #ff0044;
 }
 
-@keyframes glitchAnim1 {
-  0% { transform: translate(-2px, -1px); }
-  50% { transform: translate(3px, 1px); }
-  100% { transform: translate(-1px, 2px); }
+.hero-block-title:hover .hero-title,
+.hero-title:hover {
+  animation: textJitter 0.18s infinite ease-in-out;
+  text-shadow: 
+    0 0 25px rgba(255, 34, 51, 0.95),
+    -3px 0 #00ffff,
+    3px 0 #ff0055 !important;
 }
 
-@keyframes glitchAnim2 {
-  0% { transform: translate(2px, 1px); }
-  50% { transform: translate(-3px, -1px); }
-  100% { transform: translate(1px, -2px); }
+@keyframes chromaticGlitch1 {
+  0% {
+    clip-path: polygon(0 10%, 100% 10%, 100% 32%, 0 32%);
+    transform: translate(-4px, -2px) skewX(-2deg);
+  }
+  35% {
+    clip-path: polygon(0 45%, 100% 45%, 100% 65%, 0 65%);
+    transform: translate(3px, 1px) skewX(1deg);
+  }
+  70% {
+    clip-path: polygon(0 2%, 100% 2%, 100% 22%, 0 22%);
+    transform: translate(-2px, 2px) skewX(-1.5deg);
+  }
+  100% {
+    clip-path: polygon(0 75%, 100% 75%, 100% 95%, 0 95%);
+    transform: translate(4px, -1px) skewX(2deg);
+  }
+}
+
+@keyframes chromaticGlitch2 {
+  0% {
+    clip-path: polygon(0 62%, 100% 62%, 100% 84%, 0 84%);
+    transform: translate(4px, 1px) skewX(2deg);
+  }
+  40% {
+    clip-path: polygon(0 20%, 100% 20%, 100% 45%, 0 45%);
+    transform: translate(-3px, -1px) skewX(-2deg);
+  }
+  80% {
+    clip-path: polygon(0 78%, 100% 78%, 100% 98%, 0 98%);
+    transform: translate(2px, -2px) skewX(1deg);
+  }
+  100% {
+    clip-path: polygon(0 35%, 100% 35%, 100% 55%, 0 55%);
+    transform: translate(-4px, 2px) skewX(-1deg);
+  }
+}
+
+@keyframes textJitter {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 1px) skewX(-0.5deg); }
+  50% { transform: translate(1px, -1px) skewX(0.5deg); }
+  75% { transform: translate(-1px, -1px); }
+  100% { transform: translate(1px, 1px); }
+}
+
+/* Button Glitch Effect on Hover */
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-read-feat:hover,
+.filter-btn:hover {
+  animation: btnGlitch 0.28s infinite alternate ease-in-out;
+}
+
+@keyframes btnGlitch {
+  0% { box-shadow: 0 0 25px rgba(255, 34, 51, 0.85), -1px 0 #00ffff, 1px 0 #ff0055; }
+  50% { box-shadow: 0 0 35px rgba(255, 34, 51, 1), 2px 0 #00ffff, -2px 0 #ff0055; }
+  100% { box-shadow: 0 0 20px rgba(255, 34, 51, 0.7), -2px 0 #00ffff, 2px 0 #ff0055; }
 }
 
 /* Angled Block 3: Narrative Excerpt Note */
@@ -1831,6 +1951,25 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 40px rgba(181, 31, 40, 0.65);
   max-height: 85vh;
   overflow-y: auto;
+  animation: modalContentGlitch 0.32s cubic-bezier(0.15, 0.85, 0.35, 1.2) forwards;
+}
+
+@keyframes modalContentGlitch {
+  0% {
+    transform: scale(0.92) translate(-6px, 4px) skewX(3deg);
+    filter: drop-shadow(-4px 0 #00ffff) drop-shadow(4px 0 #ff0055);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.02) translate(4px, -2px) skewX(-2deg);
+    filter: drop-shadow(4px 0 #00ffff) drop-shadow(-4px 0 #ff0055);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1) translate(0, 0) skewX(0deg);
+    filter: drop-shadow(0 0 40px rgba(181, 31, 40, 0.65));
+    opacity: 1;
+  }
 }
 
 .close-modal {
