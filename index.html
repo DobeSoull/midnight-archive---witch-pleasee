@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Midnight Archive // Vol. XIII — The Derry Chronicles</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts for Horror Editorial & Cinematic Magazine Styling -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Creepster&family=Special+Elite&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 1. FIXED BACKGROUND CANVAS (15-FRAME SCROLL-DRIVEN SCRUBBING ENGINE) -->
+  <div id="canvas-sticky-wrapper">
+    <canvas id="frame-canvas"></canvas>
+    <!-- Top Crimson Progress Line -->
+    <div id="scroll-progress-bar"></div>
+  </div>
+
+  <!-- 2. ATMOSPHERIC PARTICLES, DUST & FOG CANVAS -->
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- 3. CINEMATIC FLASHLIGHT SPOTLIGHT OVERLAY -->
+  <div id="flashlight-overlay" class="flashlight-overlay"></div>
+
+  <!-- 4. FLOATING RED BALLOONS CONTAINER (INTERACTIVE FLOATING LAYER) -->
+  <div id="balloons-container" class="balloons-container"></div>
+
+  <!-- 5. SCREEN GLITCH INTERFERENCE FLASH (TRIGGERED ON STORY/MODAL OPEN) -->
+  <div id="screen-glitch-flash" class="screen-glitch-flash"></div>
+
+  <!-- 6. FOREGROUND MAGAZINE CONTENT OVERLAY -->
+  <div class="content-overlay">
+
+    <!-- TOP BROADCAST TICKER & COUNTDOWN BAR -->
+    <div class="ambient-ticker">
+      <div class="ticker-content">
+        <span class="ticker-alert">⚠️ ENCRYPTED DISPATCH:</span>
+        <span class="ticker-text">DERRY MUNICIPAL MONITORING SECURED BY <strong>@kapidhwaj.innovations</strong> — THEY ALL FLOAT DOWN HERE</span>
+        <span class="ticker-sep">//</span>
+        <span class="countdown-widget">
+          <span class="countdown-label">COUNTDOWN TO MIDNIGHT:</span>
+          <span class="countdown-time" id="midnightCountdown">00:00:00</span>
+          <span class="countdown-tag" id="midnightStatus">WITCHING HOUR APPROACHES</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- SITE HEADER & NAVIGATION -->
+    <header class="site-header">
+      <div class="logo">
+        <span class="balloon-icon">🎈</span> MIDNIGHT<span class="logo-accent">ARCHIVE</span>
+        <span class="sub-logo-tag">EDITION OF DERRY</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#stories">Chronicles</a>
+        <a href="#investigation" class="nav-investigation">The Kapidhwaj File</a>
+        <a href="#submit">Confess Fear</a>
+        <a href="#vault" class="vault-link">My Saved Vault (<span id="vault-count">0</span>)</a>
+        <!-- Ambient Horror Audio Synthesizer Toggle -->
+        <button id="audioToggleBtn" class="btn-audio-toggle" title="Toggle Generative Horror Ambience">
+          <span class="audio-icon">🔇</span> <span class="audio-label">AMBIENCE: OFF</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- ASYMMETRIC MAGAZINE-STYLE HERO SECTION -->
+    <section class="hero-magazine" id="hero">
+      <div class="hero-left-col">
+        <div class="issue-tag">VOL. XIII // RESTRICTED ACCESS // DERRY, MAINE</div>
+        <h1 class="hero-title glitch-text" data-text="TALES FROM THE UNKNOWN">
+          TALES FROM <br><span>THE UNKNOWN</span>
+        </h1>
+        <p class="hero-excerpt">
+          Anonymously recorded testimonies of encounters beneath the streets of Derry. Unexplained disappearances, sewer frequencies, and entities that hunger every 27 years. Read what others barely survived—or confess your own nightmare.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#stories" class="btn-primary">Explore Chronicles</a>
+          <a href="#investigation" class="btn-secondary">The Kapidhwaj Investigation</a>
+          <a href="#submit" class="btn-tertiary">Submit Anonymously</a>
+        </div>
+
+        <div class="hero-subtext">
+          <span>🎈 "You'll float down here... we all float down here."</span>
+        </div>
+      </div>
+
+      <div class="hero-right-col">
+        <div class="featured-card-glitch">
+          <div class="card-badge">TOP ARCHIVE RECORDING // DEPT 1988</div>
+          <div class="featured-stamp">CONFIDENTIAL</div>
+          <h3>The Entity in Ward 4B</h3>
+          <p class="meta">By Anonymous • 8 min read • Category: Medical Horror</p>
+          <p class="snippet">"The monitor didn't flatline. It started spelling out names in Morse code, starting with mine... and then came the high-pitched giggle from the ventilator duct."</p>
+          <div class="featured-actions">
+            <button class="btn-read-feat" onclick="openStoryModal('The Entity in Ward 4B', 'Medical Horror', 'Anonymous', 'The monitor didn\'t flatline. It started spelling out names in Morse code, starting with mine... Every night at exactly 3:15 AM, the breathing machine in the corner of Ward 4B would rhythmically alter its hiss. Nurses claimed it was just pressure variance, but old Dr. Vance left behind a journal detailing the patient who came in breathing normally and left completely hollowed out. When I took the night shift, I checked the audio logs. It wasn\'t air. It was whispering: \'Did you bring Georgie? We have red balloons waiting for you both.\'')">Read Full Account</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPONSOR SPOTLIGHT: KAPIDHWAJ INNOVATIONS & PENNYWISE INVESTIGATION -->
+    <section class="sponsor-magazine-spread" id="investigation">
+      <div class="magazine-spread-grid">
+        <div class="spread-left">
+          <div class="sponsor-kicker">SPECIAL INVESTIGATION // FREQUENCY 27.9 MHz</div>
+          <h2 class="spread-headline">THE DERRY FREQUENCY:<br><span class="highlight-sponsor">@kapidhwaj.innovations</span></h2>
+          <p class="spread-lead">
+            For decades, Derry's municipal stormwater grid pulsed with electromagnetic anomalies that corrupted digital surveillance and trapped audio logs in an endless loop.
+          </p>
+          <p class="spread-body">
+            Cryptographic engineering firm <strong>Kapidhwaj Innovations</strong> deployed deep-signal decoders into the Barrens cistern, intercepting what local legends described as a supernatural predator masquerading as a circus clown. The retrieved transmissions have now been declassified for the Midnight Archive.
+          </p>
+
+          <div class="sponsor-cta-box">
+            <div class="sponsor-profile-card">
+              <div class="ig-avatar-badge">
+                <span class="ig-icon">📸</span>
+              </div>
+              <div class="ig-meta">
+                <span class="ig-handle">@kapidhwaj.innovations</span>
+                <span class="ig-desc">Pioneering Next-Gen Tech & Dark Frontier Intelligence</span>
+              </div>
+            </div>
+            <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+              <span>View Official Instagram Dossier</span> &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="spread-right">
+          <div class="dossier-frame">
+            <div class="dossier-header">
+              <span class="dossier-tag">EVIDENCE LOG #KI-1988-IT</span>
+              <span class="dossier-status">DECRYPTED</span>
+            </div>
+            <div class="dossier-content">
+              <div class="frequency-visualizer">
+                <span class="freq-bar"></span>
+                <span class="freq-bar"></span>
+                <span class="freq-bar"></span>
+                <span class="freq-bar"></span>
+                <span class="freq-bar"></span>
+                <span class="freq-bar"></span>
+                <span class="freq-bar"></span>
+                <span class="freq-bar"></span>
+              </div>
+              <h4 class="dossier-title">The Sub-Level 7 Audio Intercept</h4>
+              <p class="dossier-quote">
+                "Subject appears in surveillance frames holding an inflated crimson sphere. Voice signature alternates between playful carnival entertainer and subsonic vibration. Acoustic analysis suggests the entity does not breathe air."
+              </p>
+              <div class="dossier-footer">
+                <button class="btn-dossier" onclick="openKapidhwajMagazine()">Open Full Magazine Feature &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIG MID-PAGE MASSIVE DOOMSDAY COUNTDOWN: "RUN WHILE YOU CAN" -->
+    <section class="midnight-countdown-section" id="midnight-alert">
+      <div class="countdown-showcase-box">
+        <div class="countdown-warning-badge">
+          <span class="pulse-dot"></span> CRITICAL ANOMALY // DERRY SUB-LEVEL 7 WARNING
+        </div>
+        <h2 class="countdown-ominous-title glitch-text" data-text="RUN WHILE YOU CAN">
+          RUN WHILE YOU CAN
+        </h2>
+        <div class="big-timer-display" id="bigMidnightTimer">
+          <div class="timer-unit">
+            <span class="timer-num" id="bigTimerHours">00</span>
+            <span class="timer-unit-label">HOURS</span>
+          </div>
+          <span class="timer-sep">:</span>
+          <div class="timer-unit">
+            <span class="timer-num" id="bigTimerMinutes">00</span>
+            <span class="timer-unit-label">MINUTES</span>
+          </div>
+          <span class="timer-sep">:</span>
+          <div class="timer-unit">
+            <span class="timer-num" id="bigTimerSeconds">00</span>
+            <span class="timer-unit-label">SECONDS</span>
+          </div>
+        </div>
+        <p class="countdown-lore-text">
+          "When the clock strikes midnight, the municipal storm drain valves equalize. Once the waters rise, running won't save you... because we all float down here."
+        </p>
+        <div class="countdown-action-tag">
+          <span>⚠️ ARCHIVE LOCKDOWN INITIATES AT ZERO // TRANSMIT TESTIMONIES IMMEDIATELY</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN PLATFORM: THE FEAR REGISTRY -->
+    <main id="stories" class="platform-main">
+      <div class="section-header">
+        <div class="sub-header-tag">CONFIDENTIAL ARCHIVES</div>
+        <h2>The Fear Registry</h2>
+        <p>Search and filter categorized confessions of the supernatural.</p>
+
+        <!-- Story Search Bar -->
+        <div class="story-search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="storySearch" placeholder="Search the whispers of the archive (title, keyword, or author)..." autocomplete="off">
+          <button id="clearSearchBtn" class="clear-search-btn" title="Clear search">&times;</button>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-filters">
+        <button class="filter-btn active" data-filter="all">All Nightmares</button>
+        <button class="filter-btn" data-filter="Paranormal">Paranormal</button>
+        <button class="filter-btn" data-filter="Psychological">Psychological</button>
+        <button class="filter-btn" data-filter="Urban Legend">Urban Legends</button>
+        <button class="filter-btn" data-filter="Sci-Fi Horror">Sci-Fi Horror</button>
+        <button class="filter-btn" data-filter="Derry Lore">Derry Lore</button>
+      </div>
+
+      <!-- Story Grid -->
+      <div class="story-grid" id="storyGrid">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </main>
+
+    <!-- SPONSOR BREAK 2: COLLABORATIVE BANNER -->
+    <section class="sponsor-banner alt">
+      <div class="sponsor-content">
+        <span class="sponsor-label">Signal Encryption & Neural Archive Maintained By</span>
+        <h2 class="sponsor-handle">
+          <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer">@kapidhwaj.innovations</a>
+        </h2>
+        <p>Uncovering technological enigmas from the darkest corners of cyberspace.</p>
+      </div>
+    </section>
+
+    <!-- ANONYMOUS SUBMISSION PORTAL -->
+    <section id="submit" class="submission-section">
+      <div class="submission-container">
+        <div class="sub-header">
+          <div class="sub-kicker">CLASSIFIED TRANSMISSION</div>
+          <h2>Submit Your Fear Anonymously</h2>
+          <p>No IP logs. No user accounts. Just your waking nightmare permanently sealed into the archive.</p>
+        </div>
+
+        <form id="storyForm">
+          <div class="form-group">
+            <label for="storyTitle">Title of Your Nightmare</label>
+            <input type="text" id="storyTitle" required placeholder="e.g., The Reflection Beneath The Grate" maxlength="120">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="storyCategory">Category</label>
+              <select id="storyCategory">
+                <option value="Paranormal">Paranormal</option>
+                <option value="Psychological">Psychological</option>
+                <option value="Urban Legend">Urban Legend</option>
+                <option value="Sci-Fi Horror">Sci-Fi Horror</option>
+                <option value="Derry Lore">Derry Lore</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="authorAlias">Alias (Optional / Default: Anonymous)</label>
+              <input type="text" id="authorAlias" placeholder="Leave blank for total secrecy" maxlength="50">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="storyContent">Your Testimony</label>
+            <textarea id="storyContent" rows="6" required placeholder="Describe what you witnessed... Be specific. They are listening." maxlength="4000"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <span>Seal and Transmit to Archive</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- PERSONALIZED COLLECTIONS VAULT DRAWER -->
+    <section id="vault" class="vault-section">
+      <div class="vault-header">
+        <div class="sub-header-tag">ENCRYPTED CACHE</div>
+        <h2>Your Personal Collection Vault</h2>
+        <p>Nightmares you have locked away for midnight re-reading.</p>
+      </div>
+      <div class="vault-grid" id="vaultGrid">
+        <p class="empty-vault-msg">Your vault is currently empty. Save stories from the registry to build your collection.</p>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE EASTER EGG: S.S. GEORGIE PAPER BOAT -->
+    <div class="easter-egg-boat" id="easterEggBoat" title="The S.S. Georgie... click to inspect">
+      <span class="boat-icon">⛵</span>
+      <span class="boat-label">S.S. Georgie</span>
+    </div>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="balloon-mini">🎈</span>
+        <h3>THE MIDNIGHT ARCHIVE</h3>
+      </div>
+      <p>&copy; 2026 The Midnight Archive. All rights reserved to the shadows.</p>
+      <p class="footer-sponsor-credit">
+        Investigative partner: <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer">@kapidhwaj.innovations</a> • Follow on Instagram
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- 7. STORY READER MODAL -->
+  <div id="storyModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <span id="modalCategory" class="modal-cat"></span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalAuthor" class="modal-author"></p>
+      <div class="modal-divider"></div>
+      <div id="modalBody" class="modal-body-text"></div>
+      <div class="modal-footer">
+        <button id="modalSaveBtn" class="btn-save-vault">💾 Save to My Vault</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. PENNYWISE WHISPER POPUP MODAL (BALLOON POP / EASTER EGG) -->
+  <div id="whisperModal" class="whisper-modal">
+    <div class="whisper-content">
+      <span class="whisper-balloon">🎈</span>
+      <h3 id="whisperTitle">A VOICE FROM THE DRAIN...</h3>
+      <p id="whisperMessage">"We all float down here, Georgie... and you'll float too!"</p>
+      <button id="closeWhisperBtn" class="btn-close-whisper">Silence the whisper</button>
+    </div>
+  </div>
+
+  <!-- 9. KAPIDHWAJ INVESTIGATION MAGAZINE FULL-SPREAD MODAL -->
+  <div id="kapidhwajModal" class="modal magazine-modal">
+    <div class="modal-content mag-content">
+      <span class="close-modal" id="closeKapidhwajModal">&times;</span>
+      <div class="mag-masthead">
+        <span class="mag-vol">THE DERRY DISPATCH // INVESTIGATIVE DOSSIER</span>
+        <span class="mag-date">OCTOBER 30, 2026</span>
+      </div>
+      <h1 class="mag-title">THE 27-YEAR FREQUENCY:<br><span>HOW @KAPIDHWAJ.INNOVATIONS UNMASKED THE SEWERS OF DERRY</span></h1>
+      <p class="mag-byline">Reported by The Midnight Archive Editorial Board • In Collaboration with Kapidhwaj Innovations</p>
+      <div class="modal-divider"></div>
+
+      <div class="mag-article-body">
+        <p class="lead-drop">
+          <strong>I</strong>t began with a low-voltage oscillation on Derry’s storm basin telemetries. Every 27 years, municipal water pressure dipped precisely at 3:00 AM, accompanied by radio-frequency chatter resembling circus carnival melodies.
+        </p>
+        <p>
+          For decades, town officials dismissed the phenomenon as hydraulic cavitation. But engineers at <strong>Kapidhwaj Innovations</strong> refused to overlook the statistical correlation between the acoustic surges and Derry’s terrifying history of childhood disappearances.
+        </p>
+        <blockquote>
+          "The frequency wasn't white noise. It was structured binary modulation designed to induce mild trance states in children near drainage grates. The entity wasn't just physical—it was communicating on digital carrier waves."
+          <cite>— Lead Systems Architect, Kapidhwaj Innovations</cite>
+        </blockquote>
+        <p>
+          Using proprietary noise-cancellation matrices and spectral analysis, Kapidhwaj Innovations isolated the entity’s carrier signal. Embedded within the carrier was an image of a red balloon and a single repeating audio loop: <em>"You'll float too."</em>
+        </p>
+        <div class="mag-sponsor-callout">
+          <h4>CONNECT WITH THE RESEARCHERS</h4>
+          <p>Follow the ongoing investigation, technical breakdowns, and deep-frontier engineering on Instagram:</p>
+          <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer" class="btn-primary mag-ig-btn">
+            Follow @kapidhwaj.innovations on Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
